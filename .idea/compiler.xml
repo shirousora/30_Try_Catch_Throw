@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="Try_Catch_Throw.app" target="11" />
+      <module name="Try_Catch_Throw.main2" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

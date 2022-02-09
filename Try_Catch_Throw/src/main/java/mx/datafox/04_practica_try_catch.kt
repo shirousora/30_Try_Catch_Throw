@@ -7,13 +7,14 @@ fun main() {
     Si ocurre una excepción, atraparla e imprimir un mensaje explicativo
      */
 
-    println("Favor de ingresar un número")
-    val entrada = readLine()
+    println("Escriba un numero: ")
+    val eNum = readLine()
     try {
-        val numero = entrada?.toInt()
-        println("$numero * 5 = ${ numero?.times(5) }")
+        val num = eNum?.toInt()  // para asegurar que el caracter no es null y  el simbolo se utilice como entero.
+        val multi = num?.times(5)
+        println("$num * 5 = ${multi}")
     } catch (e: Exception) {
-        println("El valor '$entrada' no es un número")
+        println(" '$eNum' no es tipo número , intente de nuevo por favor")
         e.stackTrace
     }
 
@@ -27,10 +28,11 @@ fun main() {
     println("Ingresa la distancia que corriste en kilométros")
     val kilometros = readLine()
     try {
-        val distanciaKm = kilometros?.toDouble()
-        println("$distanciaKm km es igual a ${ distanciaKm?.times(0.62) } millas")
+        val kmDouble = kilometros?.toDouble()
+        val millas = kmDouble?.times(0.62)
+        println("$kilometros km es igual a ${ millas } millas")
     } catch (e: Exception) {
-        println("No se puede leer la distancia")
+        println("el dato que ingresaste no se puede utilizar para calcular la distancia")
         e.stackTrace
     }
 
@@ -42,19 +44,24 @@ fun main() {
     Manejar cualquier excepción que pueda ocurrir
      */
 
-    println("¿Cuál producto quiere comprar?")
+
+    println("Cual producto quiere comprar?")
     val producto = readLine()
-    println("¿Cuántos desea llevar?")
-    val cantidad = readLine()
+
+    println("Cuantos productos quiere llevar?")
+    val cant = readLine()
     val precio = 14.99
-    var cantidadProductos: Int? = 0
+    var cantProd: Int? = 0
+
     try {
-        cantidadProductos = cantidad?.toInt()
+        cantProd = cant?.toInt()
+
     } catch (e: java.lang.Exception) {
-        println("No se puede leer la cantidad")
+        println("No se pudo leer la cantidad")
         e.printStackTrace()
     } finally {
-        println("$cantidadProductos $producto tiene un costo de ${ cantidadProductos?.times(precio)}")
-        println("Transacción completa")
+        println("$cantProd $producto tiene un costo de ${ cantProd?.times(precio)}")
     }
+
+
 }

@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Try_Catch_Throw"
 include ':app'
 include ':Try_Catch_Throw'
+include ':main2'

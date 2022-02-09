@@ -1,8 +1,6 @@
 package mx.datafox.proyecto
 
-import mx.datafox.proyecto.exceptions.BrokenEngineException
-import mx.datafox.proyecto.exceptions.OutOfFuelException
-import mx.datafox.proyecto.exceptions.SpaceToEarthConnectionFailedException
+import mx.datafox.proyecto.exceptions.*
 
 object Spaceport {
     fun investigateSpace(spaceCraft: SpaceCraft) {
@@ -17,7 +15,13 @@ object Spaceport {
         } catch (exception: SpaceToEarthConnectionFailedException) {
             spaceCraft.sendMessageToEarth(exception.localizedMessage)
             spaceCraft.fixConnection()
-        } finally {
+        } catch (exception: LaserIsEmptyException) {
+            spaceCraft.sendMessageToEarth(exception.localizedMessage)
+            spaceCraft.fixLaser()
+        } catch (exception: LandingFailedException) {
+            spaceCraft.sendMessageToEarth(exception.localizedMessage)
+            spaceCraft.fixLanding()
+        }finally {
             if (spaceCraft.isInSpace) {
                 spaceCraft.land()
             } else {
