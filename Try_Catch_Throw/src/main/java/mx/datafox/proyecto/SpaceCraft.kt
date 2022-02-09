@@ -1,8 +1,6 @@
 package mx.datafox.proyecto
 
-import mx.datafox.proyecto.exceptions.BrokenEngineException
-import mx.datafox.proyecto.exceptions.OutOfFuelException
-import mx.datafox.proyecto.exceptions.SpaceToEarthConnectionFailedException
+import mx.datafox.proyecto.exceptions.*
 
 class SpaceCraft {
     private var isConnectionAvailable: Boolean = false
@@ -12,6 +10,10 @@ class SpaceCraft {
     private var fuel: Int = 0
 
     var isInSpace: Boolean = false
+
+    private var landingTerrainOk: Boolean = false
+
+    private var laserAntiExtraterrestre: Int = 0
 
     fun launch() {
         if (fuel < 5) {
@@ -31,6 +33,17 @@ class SpaceCraft {
         isInSpace = true
         sendMessageToEarth("¡Estoy en el espacio!")
         sendMessageToEarth("¿Esos son extraterrestres?")
+
+
+        if (laserAntiExtraterrestre<5){
+            throw LaserIsEmptyException()
+        }
+
+
+
+        if(!landingTerrainOk){
+            throw LandingFailedException()
+        }
     }
 
     fun refuel() {
@@ -49,10 +62,26 @@ class SpaceCraft {
         sendMessageToEarth("La conexión se ha establecido")
     }
 
+    fun fixLaser(){
+        laserAntiExtraterrestre = 5
+        sendMessageToEarth("Laser recargado")
+        for (i in 1..5){
+            sendMessageToEarth("¡Disparos lanzados $i!")
+        }
+        sendMessageToEarth("Escapamos!")
+    }
+
+    fun fixLanding(){
+        landingTerrainOk = true
+        sendMessageToEarth("adaptandose a terreno para aterrizar")
+    }
+
     fun land() {
         sendMessageToEarth("Aterrizando...")
         isInSpace = false
     }
+
+
 
     fun sendMessageToEarth(message: String) = println("Nave espacial a la tierra: $message")
 }
